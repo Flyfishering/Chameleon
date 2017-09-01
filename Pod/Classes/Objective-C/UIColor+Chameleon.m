@@ -420,6 +420,8 @@
     return [[self class] colorWithContrastingBlackOrWhiteColorOn:backgroundColor isFlat:flat alpha:1.0];
 }
 
+
+// 根据背景颜色返回 白色或者黑色
 + (UIColor *)colorWithContrastingBlackOrWhiteColorOn:(UIColor *)backgroundColor
                                               isFlat:(BOOL)flat
                                                alpha:(CGFloat)alpha {
@@ -441,6 +443,9 @@
         [[self gradientImage] drawInRect:(CGRect){.size = size} blendMode:kCGBlendModeCopy alpha:1];
         
         //Read the RGB values from the context's buffer
+        // typedef unsigned char uint8_t;
+        
+        // 所以 data 是一个 uint8_t 数组
         uint8_t *data = CGBitmapContextGetData(ctx);
         backgroundColor = [UIColor colorWithRed:data[2] / 255.0f
                                           green:data[1] / 255.0f
@@ -452,6 +457,7 @@
     //Calculate Luminance
     CGFloat luminance;
     CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha1 = 0.0;
+    // 给 Red Green Blue Alpha1 赋值
     [backgroundColor getRed:&red green:&green blue:&blue alpha:&alpha1];
     
     //Check if color is transparent
@@ -461,6 +467,7 @@
     
     // Relative luminance in colorimetric spaces - http://en.wikipedia.org/wiki/Luminance_(relative)
     red *= 0.2126f; green *= 0.7152f; blue *= 0.0722f;
+    // 亮度 计算方法
     luminance = red + green + blue;
     
     if (flat == NO) {

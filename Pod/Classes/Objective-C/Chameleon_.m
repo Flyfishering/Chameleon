@@ -56,8 +56,13 @@
                      withSecondaryColor:(UIColor *)secondaryColor
                         andContentStyle:(UIContentStyle)contentStyle {
     
+    // 1. 设置状态栏 文字颜色
+    // 自动选择 状态栏的字体是白色还是黑色
     if (contentStyle == UIContentStyleContrast) {
-        
+        // 根据 primaryColor 的颜色来判断 决定 状态栏字体颜色, 是白色还是黑色
+        // 当primaryColor 的颜色是深色的时候, 状态栏字体是白色
+        // 当primaryColor 的颜色是浅色的时候, 状态栏的字体是黑色
+        // 具体判断过程, 查看 宏ContrastColor
         if ([ContrastColor(primaryColor, YES) isEqual:FlatWhite]) {
             [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
         } else {
@@ -73,18 +78,32 @@
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     }
     
+    
+    //BarButtonItem 的颜色
     [[self class] customizeBarButtonItemWithPrimaryColor:primaryColor contentStyle:contentStyle];
+    //Button 的颜色
     [[self class] customizeButtonWithPrimaryColor:primaryColor secondaryColor:secondaryColor withContentStyle:contentStyle];
+    //NavigationBar 的颜色
     [[self class] customizeNavigationBarWithPrimaryColor:primaryColor withContentStyle:contentStyle];
+    //UIPageControl 颜色
     [[self class] customizePageControlWithPrimaryColor:primaryColor withContentStyle:contentStyle];
+    //ProgressView 颜色
     [[self class] customizeProgressViewWithPrimaryColor:primaryColor andSecondaryColor:secondaryColor];
+    //SearchBar 颜色
     [[self class] customizeSearchBarWithPrimaryColor:primaryColor withContentStyle:contentStyle];
+    //SegmentedControl 颜色
     [[self class] customizeSegmentedControlWithPrimaryColor:primaryColor withContentStyle:contentStyle];
+    //Slider 颜色
     [[self class] customizeSliderWithPrimaryColor:primaryColor andSecondaryColor:secondaryColor];
+    //Stepper 颜色
     [[self class] customizeStepperWithPrimaryColor:primaryColor withContentStyle:contentStyle];
+    //Switch 颜色
     [[self class] customizeSwitchWithPrimaryColor:primaryColor andSecondaryColor:secondaryColor];
+    //TabBar 颜色
     [[self class] customizeTabBarWithBarTintColor:FlatWhite andTintColor:primaryColor];
+    //Toolbar 颜色
     [[self class] customizeToolbarWithPrimaryColor:primaryColor withContentStyle:contentStyle];
+    //PickerController 颜色
     [[self class] customizeImagePickerControllerWithPrimaryColor:primaryColor withContentStyle:contentStyle];
 }
 
@@ -165,10 +184,10 @@
 
 + (void)customizeBarButtonItemWithPrimaryColor:(UIColor *)primaryColor
                                   contentStyle:(UIContentStyle)contentStyle {
-    
     UIColor *contentColor;
     switch (contentStyle) {
         case UIContentStyleContrast: {
+            // 根据 primaryColor 来返回白色或者黑色
             contentColor = ContrastColor(primaryColor, NO);
             break;
         }

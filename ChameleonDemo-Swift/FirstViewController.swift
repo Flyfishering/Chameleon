@@ -86,7 +86,7 @@ class FirstViewController: UITableViewController {
         // Darker color > not yet reliable
         darkerColorLabel.text = "Aa \u{25A0}"
         darkerColorLabel.textColor = randomFlatColor.darken(byPercentage: 0.5)
-        // Gradient color
+        // Gradient color 梯度
         let firstRandomColor = UIColor.randomFlat
         let secondRandomColor = UIColor.randomFlat
         let thirdRandomColor = UIColor.randomFlat
